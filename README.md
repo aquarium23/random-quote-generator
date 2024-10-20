@@ -1,8 +1,5 @@
-# React + Vite
+# Random Quote Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+プログラミングに関する名言をランダムに生成するアプリです。
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2024 年 10 月 20 日開催の[【React 入門】初心者向けハンズオン勉強会](https://beginner-react.connpass.com/event/334366/)で作成しました。
