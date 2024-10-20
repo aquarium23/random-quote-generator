@@ -10,13 +10,16 @@ const fetchRandomQuote = async () => {
 function App() {
   const [quote, setQuote] = useState(null);
   const [refreshFlag, setRefreshFlag] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // useEffectが複数回呼ばれたときの対処
     let active = true;
+    setIsLoading(true);
     fetchRandomQuote().then((quote) => {
       if (active) {
         setQuote(quote);
+        setIsLoading(false);
       }
     });
     return () => {
@@ -58,12 +61,19 @@ function App() {
             <div className="bg-blue-100 text-3xl h-16 w-16 rounded-full flex justify-center items-center">
               💬
             </div>
+            {isLoading ? (
+              <p className="text-center text-xl text-gray-200">Is Loading...</p>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-center text-xl text-gray-200">
+                  {quote?.quote}
+                </p>
 
-            <p className="text-center text-xl text-gray-200">{quote?.quote}</p>
-
-            <p className="text-gray-300 text-center">by {quote?.author}</p>
+                <p className="text-gray-300 text-center">by {quote?.author}</p>
+              </div>
+            )}
           </div>
-        </div>{" "}
+        </div>
         {/* Footer */}
         <footer className="text-center">
           <p className="text-gray-700">
