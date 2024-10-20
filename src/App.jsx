@@ -1,6 +1,28 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
+const fetchRandomQuote = async () => {
+  const response = await fetch(
+    "https://programming-quotesapi.vercel.app/api/random"
+  );
+  return await response.json();
+};
+
 function App() {
+  const [quote, setQuote] = useState(null);
+
+  useEffect(() => {
+    // useEffectが複数回呼ばれたときの対処
+    let active = true;
+    fetchRandomQuote().then((quote) => {
+      if (active) {
+        setQuote(quote);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
   return (
     <>
       <div className="bg-gray-100 min-h-screen pt-16 pb-8 space-y-8">
@@ -36,13 +58,9 @@ function App() {
               💬
             </div>
 
-            <p className="text-center text-xl text-gray-200">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et vero
-              libero ut earum, totam ipsum, velit eos nostrum repudiandae labore
-              a? Odit saepe sit nulla rerum expedita iste. Laborum, eius!
-            </p>
+            <p className="text-center text-xl text-gray-200">{quote?.quote}</p>
 
-            <p className="text-gray-300 text-center">by Lorem ipsum</p>
+            <p className="text-gray-300 text-center">by {quote?.author}</p>
           </div>
         </div>{" "}
         {/* Footer */}
