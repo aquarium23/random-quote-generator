@@ -10,6 +10,7 @@ const fetchRandomQuote = async () => {
 
 function App() {
   const [quote, setQuote] = useState(null);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     // useEffectが複数回呼ばれたときの対処
@@ -22,7 +23,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [refreshFlag]);
   return (
     <>
       <div className="bg-gray-100 min-h-screen pt-16 pb-8 space-y-8">
@@ -39,6 +40,7 @@ function App() {
           <button
             className="bg-black text-white hover:bg-gray-700 flex mx-auto rounded-xl py-4 px-8"
             type="button"
+            onClick={() => setRefreshFlag(!refreshFlag)}
           >
             <svg
               className="w-6 h-6 mr-2 fill-white"
